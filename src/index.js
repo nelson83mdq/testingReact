@@ -1,8 +1,46 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+const Hello = ({name, age}) => {
+  // des- estructuracion de props
+  //const name = props.name
+  //const age = props.age
+
+  const bornYear = () => new Date().getFullYear() - age
+
+  return (
+    <div>
+      <p>Hello {name}, you are {age} years old</p>
+      <p>So you were probably born in {bornYear()} </p>
+    </div>
+  )
+}
+
+//---------------------------------------------------------------------
+function Boton({value}){
+  const [counter, setCounter] = useState(0)
+  return (
+    <button
+      onClick={() => setCounter(counter+1)}>
+        {value + " " + counter}
+    </button>
+  );
+}
+//---------------------------------------------------------------------
+
+const App = () => {
+  const name = 'Peter'
+  const age = 10
+
+  return (
+    <div>
+      <h1>Greetings</h1>
+      <Hello name="Maya" age={26 + 10} />
+      <Hello name={name} age={age} />
+      <Boton value="hola manola"/>
+    </div>
+  )
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -10,8 +48,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
